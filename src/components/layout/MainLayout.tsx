@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   Home, 
@@ -14,6 +13,7 @@ import {
   Moon, 
   Sun 
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -24,6 +24,8 @@ export default function MainLayout({ children, userType }: MainLayoutProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   // Toggle dark mode
   useEffect(() => {
@@ -33,6 +35,12 @@ export default function MainLayout({ children, userType }: MainLayoutProps) {
       document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
+  
+  // Handle logout
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
 
   const doctorNavItems = [
     { name: "Dashboard", path: "/doctor/dashboard", icon: <Home size={20} /> },
@@ -99,7 +107,7 @@ export default function MainLayout({ children, userType }: MainLayoutProps) {
             <Button 
               variant="ghost" 
               className="flex items-center w-full justify-start text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
-              onClick={() => window.location.href = "/"}
+              onClick={handleLogout}
             >
               <LogOut size={18} className="mr-2" />
               Logout

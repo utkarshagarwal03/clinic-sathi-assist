@@ -6,11 +6,11 @@ const supabaseUrl = 'https://bbuqgdwlqsntoqxjzail.supabase.co'
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJidXFnZHdscXNudG9xeGp6YWlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQzNzIzMzEsImV4cCI6MjA1OTk0ODMzMX0.ZxOPNwM5A23RbhwCz9Cs8bMgwp2YlaMjrN-VHITgBLc'
 
 // Log missing configuration for debugging
-if (!supabaseUrl || supabaseUrl === '') {
+if (!supabaseUrl) {
   console.error('Missing Supabase URL')
 }
 
-if (!supabaseAnonKey || supabaseAnonKey === '') {
+if (!supabaseAnonKey) {
   console.error('Missing Supabase Anon Key')
 }
 
